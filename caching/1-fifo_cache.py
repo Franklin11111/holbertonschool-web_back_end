@@ -4,10 +4,12 @@
 
 from base_caching import BaseCaching
 
+
 class FIFOCache(BaseCaching):
     """ Inherits from BaseCaching:
               - it is a FIFO caching system
-              - references the data are stored (in a dictionary of a parent class)
+              - references the data are stored (in a
+                dictionary of a parent class)
     """
 
     def __init__(self):
