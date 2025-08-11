@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" BasicCache module that inherits from BaseCache class
+""" BaseCaching module
 """
 
 class BaseCaching():
@@ -31,6 +31,8 @@ class BaseCaching():
         """
         raise NotImplementedError("get must be implemented in your cache class")
 
+""" BasicCache module that inherits from BaseCache class
+"""
 
 class BasicCache(BaseCaching):
     """ Inherits from BaseCaching:
