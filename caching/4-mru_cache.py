@@ -5,7 +5,7 @@
 from base_caching import BaseCaching
 
 
-class MRUCache(BaseCaching):
+class MRUCache(BaseCaching): 
     """ Inherits from BaseCaching:
               - it is an MRU caching system
               - discard the most recently used item
