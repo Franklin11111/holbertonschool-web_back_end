@@ -16,9 +16,7 @@ import re
 #     return new_message
 
 def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
-    """
-    Function for filtering sensitive information
-    """
+    """    Function for filtering sensitive information    """
     pattern_regex = '(' + '=.*|'.join(fields) + '=.*)'
     new_fields = []
     for m in message.split(';'):
