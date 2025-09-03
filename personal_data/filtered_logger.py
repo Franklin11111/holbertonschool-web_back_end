@@ -39,3 +39,15 @@ class RedactingFormatter(logging.Formatter):
                                      f"{m[0:m.find('=')]}={redaction}", m)) \
                 if m[0:m.find('=')] in fields else new_fields.append(m)
         return separator.join(new_fields)
+
+PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
+
+def get_logger() -> logging.Logger:
+    logger = logging.getLogger('user_data')
+    logger.setLevel('INFO')
+    logger.propagate = False
+    handler = logging.StreamHandler()
+    formatter = RedactingFormatter(fields=(PII_FIELDS))
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    return logger
