@@ -24,8 +24,8 @@ class RedactingFormatter(logging.Formatter):
                                     message=record.msg, separator=self.SEPARATOR)
         logging.basicConfig(format=self.FORMAT)
         logger = logging.getLogger(record.name)
-        logger.setLevel('DEBUG')
-        return logger.info(message)
+        logger.setLevel(record.levelname)
+        return logger.log(msg=message, level=record.levelno)
 
     def filter_datum(self, fields: List[str], redaction: str, message: str,
                      separator: str) -> str:
