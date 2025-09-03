@@ -57,7 +57,7 @@ def get_logger() -> logging.Logger:
     logger.addHandler(handler)
     return logger
 
-def get_db():
+def get_db() -> mysql.connector.connection.MySQLConnection:
     connection = mysql.connector.connect(
         host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
         user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
