@@ -23,8 +23,11 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         message = self.filter_datum(self.fields, redaction=self.REDACTION,
-                                    message=record.msg, separator=self.SEPARATOR)
-        return f"[HOLBERTON] {record.name} {record.levelname} {date.today()}-15s: {message}"
+                                    message=record.msg,
+                                    separator=self.SEPARATOR)
+        return (f"[HOLBERTON] {record.name} {record.levelname} "
+                f"{date.today()}-15s:"
+                f" {message}")
 
     def filter_datum(self, fields: List[str], redaction: str, message: str,
                      separator: str) -> str:
