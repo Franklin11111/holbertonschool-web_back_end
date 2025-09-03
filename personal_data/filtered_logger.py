@@ -40,7 +40,7 @@ class RedactingFormatter(logging.Formatter):
                 if m[0:m.find('=')] in fields else new_fields.append(m)
         return separator.join(new_fields)
 
-PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 def get_logger() -> logging.Logger:
     logger = logging.getLogger('user_data')
