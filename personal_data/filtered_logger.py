@@ -20,7 +20,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        message = self.filter_datum(fields=["email", "ssn", "password"], redaction=self.REDACTION,
+        message = self.filter_datum(self.fields, redaction=self.REDACTION,
                                     message=record.msg, separator=self.SEPARATOR)
         logging.basicConfig(format=self.FORMAT)
         logger = logging.getLogger(record.name)
