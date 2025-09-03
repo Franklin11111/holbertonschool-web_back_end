@@ -44,7 +44,7 @@ PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 def get_logger() -> logging.Logger:
     logger = logging.getLogger('user_data')
-    logger.setLevel('INFO')
+    logger.setLevel(logging.INFO)
     logger.propagate = False
     handler = logging.StreamHandler()
     formatter = RedactingFormatter(fields=(PII_FIELDS))
