@@ -67,3 +67,19 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database=os.getenv('PERSONAL_DATA_DB_NAME')
     )
     return connection
+
+
+def main():
+    db_connection = get_db()
+    cursor = db_connection.cursor()
+    cursor.execute("SELECT * FROM users")
+    rows = cursor.fetchall()
+    for row in rows:
+        log_record = logging.LogRecord("user_data", logging.INFO, None, None, row, None, None)
+        formatter = RedactingFormatter(PII_FIELDS)
+        print(formatter.format(log_record))
+    cursor.close()
+    db_connection.close()
+
+if __name__ == "__main__":
+    main()
