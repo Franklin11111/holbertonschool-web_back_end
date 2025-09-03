@@ -2,6 +2,7 @@
 """
 Using Regex for obfuscating sensitive information
 """
+import sys
 from typing import List
 import re
 import logging
@@ -24,9 +25,14 @@ class RedactingFormatter(logging.Formatter):
                                     message=record.msg, separator=self.SEPARATOR)
         logging.basicConfig(format=self.FORMAT)
         logger = logging.getLogger(record.name)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(record.levelname)
+        formatter = logging.Formatter(self.FORMAT)
+        handler.setFormatter(formatter)
         logger.setLevel(record.levelname)
+        #logger.addHandler(handler)
         logger.log(msg=message, level=record.levelno)
-        return message
+        return ''
 
     def filter_datum(self, fields: List[str], redaction: str, message: str,
                      separator: str) -> str:
