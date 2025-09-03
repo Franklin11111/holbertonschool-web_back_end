@@ -7,6 +7,8 @@ from typing import List
 import re
 import logging
 from datetime import date
+import os
+import mysql.connector
 
 
 class RedactingFormatter(logging.Formatter):
@@ -54,3 +56,12 @@ def get_logger() -> logging.Logger:
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     return logger
+
+def get_db():
+    connection = mysql.connector.connect(
+        host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        database=os.getenv('PERSONAL_DATA_DB_NAME')
+    )
+    return connection
