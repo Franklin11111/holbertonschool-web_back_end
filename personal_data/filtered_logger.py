@@ -75,7 +75,8 @@ def main():
     cursor.execute("SELECT * FROM users")
     rows = cursor.fetchall()
     for row in rows:
-        log_record = logging.LogRecord("user_data", logging.INFO, None, None, row, None, None)
+        log_record = logging.LogRecord("user_data", logging.INFO,
+                                       None, None, row, None, None)
         formatter = RedactingFormatter(PII_FIELDS)
         print(formatter.format(log_record))
     cursor.close()
