@@ -53,21 +53,21 @@ class RedactingFormatter(logging.Formatter):
                 if m[0:m.find('=')] in fields else new_fields.append(m)
         return separator.join(new_fields)
 
-#
-# PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
-#
-#
-# def get_logger() -> logging.Logger:
-#     """    Function for creating a logger object    """
-#     logger = logging.getLogger('user_data')
-#     logger.setLevel(logging.INFO)
-#     logger.propagate = False
-#     handler = logging.StreamHandler()
-#     formatter = RedactingFormatter(fields=(PII_FIELDS))
-#     handler.setFormatter(formatter)
-#     logger.addHandler(handler)
-#     return logger
-#
+
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
+
+
+def get_logger() -> logging.Logger:
+    """    Function for creating a logger object    """
+    logger = logging.getLogger('user_data')
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    handler = logging.StreamHandler()
+    formatter = RedactingFormatter(fields=(PII_FIELDS))
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    return logger
+
 #
 # def get_db() -> mysql.connector.connection.MySQLConnection:
 #     """    Function for connecting to the database    """
