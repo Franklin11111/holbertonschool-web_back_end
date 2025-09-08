@@ -15,11 +15,11 @@ def status() -> str:
 
 @app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
 def authorization():
-    abort(401, error="Unauthorized")
     """ GET /api/v1/unauthorized
         Return:
           - error object
-        """
+    """
+    abort(401, error="Unauthorized")
     from api.v1.app import unauthorized
     unauthorized(status)
 
