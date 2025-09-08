@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ Module of Users views
 """
-from ..views import app_views
+from api.v1.views import app_views
 from flask import abort, jsonify, request
-from Basic_authentication.models.user import User
+from models.user import User
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
