@@ -10,7 +10,7 @@ def authorization():
         Return:
           - error object
     """
-    abort(401, error="Unauthorized")
+    abort(401)
     from api.v1.app import unauthorized
     unauthorized(status)
 
