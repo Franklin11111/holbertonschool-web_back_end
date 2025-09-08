@@ -33,5 +33,3 @@ def abort(status):
         """
     from api.v1.app import unauthorized
     unauthorized(status)
-abort(401)
-
