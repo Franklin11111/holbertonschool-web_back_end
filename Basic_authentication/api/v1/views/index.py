@@ -13,6 +13,16 @@ def status() -> str:
     """
     return jsonify({"status": "OK"})
 
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+def authorization():
+    abort(401, error="Unauthorized")
+    """ GET /api/v1/unauthorized
+        Return:
+          - error object
+        """
+    from api.v1.app import unauthorized
+    unauthorized(status)
+
 
 @app_views.route('/stats/', strict_slashes=False)
 def stats() -> str:
@@ -25,11 +35,4 @@ def stats() -> str:
     stats['users'] = User.count()
     return jsonify(stats)
 
-@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
-def abort(status):
-    """ GET /api/v1/unauthorized
-        Return:
-          - error object
-        """
-    from api.v1.app import unauthorized
-    unauthorized(status)
+
