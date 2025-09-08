@@ -32,5 +32,6 @@ def abort(status):
           - error object
         """
     from api.v1.app import unauthorized
-    unauthorized(401)
+    unauthorized(status)
+abort(401)
 
