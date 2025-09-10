@@ -15,6 +15,7 @@ def authorization():
     from api.v1.app import unauthorized
     unauthorized(status)
 
+
 @app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
 def noAccess():
     """ GET /api/v1/forbidden
