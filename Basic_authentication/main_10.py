@@ -1,9 +1,5 @@
-#!/usr/bin/env python3
-""" Main
-"""
-from v1.auth.auth import Auth
-from v1.auth.basic_auth import BasicAuth
 import uuid
+from api.v1.auth.basic_auth import BasicAuth
 from models.user import User
 
 """ Create a user test """
@@ -18,5 +14,6 @@ print("New user: {}".format(user.display_name()))
 user.save()
 
 a = BasicAuth()
-u = a.user_object_from_credentials("email@notfound.com", "pwd")
-print(u)
+
+u = a.user_object_from_credentials(user_email, user_clear_pwd)
+print(u.display_name() if u is not None else "None")
