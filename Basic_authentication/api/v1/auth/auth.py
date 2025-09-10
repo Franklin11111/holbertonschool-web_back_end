@@ -3,12 +3,19 @@
     Auth module
 """
 from typing import List, TypeVar
-from flask import request
+from flask import request, jsonify
 
 
 class Auth:
     """Auth class
     """
+    def __init__(self):
+        self.request = request
+    # def get(self):
+    #     authorization = request.headers.get("Authorization")
+    #     return jsonify({
+    #         'Authorization': authorization
+    #     })
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
@@ -31,13 +38,15 @@ class Auth:
         """
         Check authorization header
         """
-        author = request.args.get("Authorization")
+        author = None
+        if self.request.headers.get("Authorization"):
+            author = self.request.headers.get("Authorization")
         if request is None:
             return None
         elif not author:
             return None
         else:
-            return request["Authorization"]
+            return author
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
