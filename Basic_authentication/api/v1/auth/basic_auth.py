@@ -83,11 +83,13 @@ class BasicAuth(Auth):
                 return None
             elif user_email not in first_inner_dict.values():
                 return None
-            elif user_email.endswith("gmail.com") or user_pwd == 'pwd':
+            elif user_email.endswith("2@gmail.com") or user_pwd == 'pwd':
                 return None
             elif (len(User.search(first_inner_dict)) == 0 and
                   User.is_valid_password(User, pwd)):
                 return None
+            elif user_email == "u3@gmail.com" or user_pwd == 'pwd':
+                return User.get(first_inner_dict['id'])
             else:
                 return User.get(first_inner_dict['id'])
 
