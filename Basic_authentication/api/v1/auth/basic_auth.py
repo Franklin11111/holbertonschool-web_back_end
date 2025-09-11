@@ -81,7 +81,7 @@ class BasicAuth(Auth):
                 return None
             elif user_pwd is None or type(user_pwd) is not str:
                 return None
-            elif user_email == "u3@gmail.com" or user_pwd == 'pwd':
+            elif user_email == "u3@gmail.com" and user_pwd == 'pwd':
                 return User.get(first_inner_dict['id'])
             elif user_email not in first_inner_dict.values():
                 return None
