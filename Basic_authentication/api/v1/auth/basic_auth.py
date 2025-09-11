@@ -5,6 +5,7 @@ from typing import TypeVar
 from .auth import Auth
 import base64
 from models.user import User
+import json
 
 
 class BasicAuth(Auth):
@@ -68,13 +69,25 @@ class BasicAuth(Auth):
         """
         returns the User instance based on his email and password
         """
-        if user_email is None or type(user_email) is not str:
+        try:
+            with open(".db_User.json", "r") as file:
+                data = json.load(file)
+                first_key = next(iter(data))
+                first_inner_dict = data[first_key]
+                pwd = first_inner_dict['_password']
+                # list_user = User.search(first_inner_dict)
+                # return first_inner_dict
+            if user_email is None or type(user_email) is not str:
+                return None
+            elif user_pwd is None or type(user_pwd) is not str:
+                return None
+            elif user_email not in first_inner_dict.values():
+                return None
+            elif  User.is_valid_password(User, pwd):
+                return None
+            else:
+                return User.get(first_inner_dict['id'])
+
+        except FileNotFoundError:
+            print(f"Error: File '.db_User.json' not found")
             return None
-        elif user_pwd is None or type(user_pwd) is not str:
-            return None
-        elif user_email not in User.search():
-            return None
-        elif user_pwd not in User.search():
-            return None
-        else:
-            return User(User.search(), {'email': user_email, '_password': user_pwd})
