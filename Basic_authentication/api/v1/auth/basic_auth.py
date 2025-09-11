@@ -83,7 +83,8 @@ class BasicAuth(Auth):
                 return None
             elif user_email not in first_inner_dict.values():
                 return None
-            elif  User.is_valid_password(User, pwd):
+            elif (len(User.search(first_inner_dict)) == 0 and
+                  User.is_valid_password(User, pwd)):
                 return None
             else:
                 return User.get(first_inner_dict['id'])
