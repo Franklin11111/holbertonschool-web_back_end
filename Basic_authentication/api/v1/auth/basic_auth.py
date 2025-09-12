@@ -16,6 +16,7 @@ class BasicAuth(Auth):
     """
     def __init__(self):
         super().__init__()
+        self.request = request
 
     def extract_base64_authorization_header(
             self, authorization_header: str) -> str:
@@ -103,7 +104,7 @@ class BasicAuth(Auth):
         """
         overloads Auth and retrieves the User instance for a request
         """
-        auth_header = super().authorization_header()
+        auth_header = super().authorization_header(request)
         base64_auth_header = None
         decoded_base64_auth_header = None
         user_email = None
