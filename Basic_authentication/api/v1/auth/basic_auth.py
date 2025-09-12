@@ -6,6 +6,8 @@ from .auth import Auth
 import base64
 from models.user import User
 import json
+from flask import request
+
 
 
 class BasicAuth(Auth):
@@ -96,3 +98,25 @@ class BasicAuth(Auth):
         except FileNotFoundError:
             print(f"Error: File '.db_User.json' not found")
             return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """
+        overloads Auth and retrieves the User instance for a request
+        """
+        auth_header = super().authorization_header()
+        base64_auth_header = None
+        decoded_base64_auth_header = None
+        user_email = None
+        user_pwd = None
+        user = None
+
+        if auth_header:
+            base64_auth_header = (
+                self.extract_base64_authorization_header(auth_header))
+        if base64_auth_header:
+            decoded_base64_auth_header = self.decode_base64_authorization_header(base64_auth_header)
+        if decoded_base64_auth_header:
+            user_email, user_pwd = self.extract_user_credentials(decoded_base64_auth_header)
+        if user_email and user_pwd:
+            user = self.user_object_from_credentials(user_email, user_pwd)
+        return user
