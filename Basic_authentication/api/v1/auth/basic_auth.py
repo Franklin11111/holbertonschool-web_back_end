@@ -24,22 +24,14 @@ class BasicAuth(Auth):
         returns the Base64 part of the Authorization
         header for a Basic Authentication
         """
-        header = ''
         if authorization_header is None:
             return None
         elif type(authorization_header) is not str:
             return None
         elif not authorization_header.startswith("Basic "):
             return None
-        elif authorization_header.startswith("Basic "):
-            header = authorization_header[6:]
-        elif not authorization_header.startswith("BasicAuth "):
-            return None
-        elif authorization_header.startswith("BasicAuth "):
-            header = authorization_header[10:]
-        # else:
-        #     return authorization_header[10:]
-        return header
+        else:
+            return authorization_header[6:]
 
     def decode_base64_authorization_header(
             self, base64_authorization_header: str) -> str:
