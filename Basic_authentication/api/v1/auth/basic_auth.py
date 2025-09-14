@@ -28,10 +28,12 @@ class BasicAuth(Auth):
             return None
         elif type(authorization_header) is not str:
             return None
-        elif not authorization_header.startswith("Basic "):
+        elif not authorization_header.startswith("BasicAuth "):
             return None
+        # elif not authorization_header.startswith("BasicAuth "):
+        #     return None
         else:
-            return authorization_header[6:]
+            return authorization_header[10:]
 
     def decode_base64_authorization_header(
             self, base64_authorization_header: str) -> str:
