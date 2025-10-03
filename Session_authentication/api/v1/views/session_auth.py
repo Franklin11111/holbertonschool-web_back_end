@@ -39,3 +39,18 @@ def session_login():
     response.set_cookie(os.getenv('SESSION_NAME'), session_id)
 
     return response
+
+
+@app_views.route('/auth_session/logout',
+                 methods=['DELETE'], strict_slashes=False)
+def session_logout():
+    """ DELETE /auth_session/login
+    Return:
+      empty dictionnary
+    """
+    from api.v1.app import auth
+    destroy_session = auth.destroy_session(request)
+    if destroy_session is False:
+        abort(404)
+
+    return jsonify({}), 200
