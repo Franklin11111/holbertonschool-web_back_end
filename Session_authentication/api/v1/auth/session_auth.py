@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+""" Session authentication
+"""
+
+from .auth import Auth
+
+
+class SessionAuth(Auth):
+    """ Class to manage the API authentication
+    """
