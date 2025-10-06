@@ -55,3 +55,15 @@ class TestGithubOrgClient(unittest.TestCase):
                              'https://api.github.com/orgs/microsoft/repos')
             mock_get_json.assert_called_once()
             mock_public_repos_url.assert_called_once_with()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+    ])
+    def test_has_license(self, repo, license_key, expected):
+        """has_license unit-test"""
+        test_object = GithubOrgClient('foo')
+        self.assertEqual(test_object.has_license(repo, license_key), expected)
+
+        with self.assertRaises(AssertionError):
+            test_object.has_license(repo, None)
