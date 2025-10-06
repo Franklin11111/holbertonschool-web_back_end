@@ -17,7 +17,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
     def test_access_nested_map(self, nested_map: Dict,
-                             path: Tuple, expected: Union[Dict, int]) -> None:
+            path: Tuple, expected: Union[Dict, int]) -> None:
         """Test if access_nested_map returns expected value"""
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
@@ -33,6 +33,7 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(KeyError) as context:
             access_nested_map(nested_map, path)
         self.assertEqual(str(context.exception), f"'{expected_message}'")
+
 
 class TestGetJson(unittest.TestCase):
     """Class to test functioning of get_json"""
