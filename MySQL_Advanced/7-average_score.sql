@@ -1,5 +1,4 @@
--- Procedure ComputeAverageScoreForUser that computes and 
---store the average score for a student
+-- Procedure ComputeAverageScoreForUser that computes average score
 
 DELIMITER //
 
@@ -17,7 +16,7 @@ BEGIN
     -- Update mean score of the user
     UPDATE users
     SET average_score = avg_score
-    WHERE id = user_id;
+    WHERE users.id = user_id;
 END;
 //
 
